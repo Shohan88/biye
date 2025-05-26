@@ -1,0 +1,117 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.body {
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  padding: 20px;
+}
+.details {
+  width: 80%;
+  margin: auto;
+  text-align: center;
+  padding: 50px;
+}
+.row {
+      margin-top: 5%;
+      display: flex;
+      justify-content: space-between;
+      border-radius: 10px;
+      margin: 10px;
+    }
+.details-col {
+  width: 280px;        /* fixed width */
+  height: 180px;       /* fixed height */
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 15px;
+  transition: transform 0.3s;
+}
+
+.details-col img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;   /* this ensures the image fills the box neatly */
+  border-radius: 10px;
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.6);
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: 0.5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.details-col:hover .layer {
+  opacity: 1;
+}
+.layer h3 {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  padding-top: 50px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 20px;
+  width: 80%;
+  border-radius: 10px;
+  max-width: 800px;
+}
+.modal-header h2 {
+  margin: 0;
+}
+.modal-body iframe {
+  width: 100%;
+  border: none;
+}
+.footer {
+  text-align: end;
+  padding: 30px;
+  background-color: transparent;
+}
+.footer h4 {
+  color: #f0f2f5;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+.icons i {
+  color: #097aeb;
+  margin: 0 10px;
+  font-size: 24px;
+  transition: color 0.3s;
+}
+.icons i:hover {
+  color: #f1ebeb;
+}
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bibaho Biodata - Age Verification</title>
+  <link rel="shortcut icon" href="/images/logo bi.png" type="image/x-icon">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"/>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <style>
+    #ageCheck {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: url("images/bg.png") no-repeat center center;
+      background-size: cover;
+      color: rgb(247, 244, 244);
+      font-family: Georgia, 'Times New Roman', Times, serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+    #ageCheck input {
+      padding: 10px;
+      font-size: 16px;
+      color: black;
+      width: 200px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+    }
+    #ageCheck button {
+      padding: 10px 20px;
+      background-color: #a80909;
+      color: rgb(49, 4, 4);
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    #ageCheck p {
+      color: whitesmoke;
+      margin-top: 10px;
+    }
+    #mainSite {
+    background: url("images/bg1.png") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding-bottom: 50px;
+  }
+  </style>
+</head>
+<body class="body">
+
+<div id="ageCheck">
+  <h1>Welcome to Marriage Biodata</h1>
+  <h2>Please Enter Your Age</h2>
+  <input type="number" id="ageInput" placeholder="Age" />
+  <button onclick="checkAge()">Enter</button>
+  <p id="ageError"></p>
+</div>
+<div id="mainSite" style="display:none;">
+  <section class="details">
+    <h1>Bibaho Biodata</h1>
+    <p>Create your marriage profile easily and beautifully.</p>
+    <div class="row">
+      <button id="btnPersonal">
+        <div class="details-col">
+          <img src="images/personal.png" alt="Personal Info" />
+          <div class="layer"><h3>Personal</h3></div>
+        </div>
+      </button>
+      <button id="btnFamily">
+        <div class="details-col">
+          <img src="images/family.png" alt="Family Info" />
+          <div class="layer"><h3>Family</h3></div>
+        </div>
+      </button>
+      <button id="btnEducation">
+        <div class="details-col">
+          <img src="images/education.png" alt="Education Info" />
+          <div class="layer"><h3>Education</h3></div>
+        </div>
+      </button>
+    </div>
+  </section>
+
+  <div id="modalPersonal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+      <span class="closePersonal">&times;</span>
+      <h2>Personal Details</h2></div>
+      <div class="modal-body">
+        <iframe src="personal.html" width="100%" height="400"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalFamily" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+      <span class="close closeFamily">&times;</span>
+      <h2>Family Details</h2></div>
+      <div class="modal-body">
+        <iframe src="family.html" width="100%" height="400"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <div id="modalEducation" class="modal">
+    <div class="modal-content">
+      <div class="modal-header"><span class="closeEducation">&times;</span>
+      <h2>Education Details</h2></div>
+      <div class="modal-body">
+        <iframe src="education.html" width="100%" height="400"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <section class="footer">
+    <h4>Follow Me</h4>
+    <div class="icons">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-whatsapp"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <p>Made with ❤️ by ShohaN</p>
+  </section>
+</div>
+
+<script>
+  function checkAge() {
+    const age = parseInt(document.getElementById('ageInput').value);
+    const error = document.getElementById('ageError');
+    if (isNaN(age) || age <= 0) {
+      error.textContent = "Please enter a valid age.";
+      return;
+    }
+    if (age >= 18) {
+      document.getElementById('ageCheck').style.display = 'none';
+      document.getElementById('mainSite').style.display = 'block';
+    } else {
+      error.textContent = "You must be at least 18 years old to enter.";
+    }
+  }
+
+  function setupModal(buttonId, modalId, closeClass) {
+    const modal = document.getElementById(modalId);
+    const btn = document.getElementById(buttonId);
+    const closeBtn = document.querySelector("." + closeClass);
+
+    if (btn && modal && closeBtn) {
+      btn.onclick = () => modal.style.display = "block";
+      closeBtn.onclick = () => modal.style.display = "none";
+      window.onclick = (event) => {
+        if (event.target === modal) modal.style.display = "none";
+      };
+    }
+  }
+
+  // ✅ Wait for full page load
+  window.onload = function () {
+    setupModal("btnPersonal", "modalPersonal", "closePersonal");
+    setupModal("btnFamily", "modalFamily", "closeFamily");
+    setupModal("btnEducation", "modalEducation", "closeEducation");
+  };
+</script>
+
+</body>
+</html>
